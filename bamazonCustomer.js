@@ -42,7 +42,7 @@ function runOrder() {
     }
 
 //create variables to hold values
-//global array to keep multiple orders for each customer
+//to test:global object or array to keep multiple orders for each customer
 var cart = {item:"", qty:""};
 //global variables to hold item and qty for each cycle of order
 var purchaseItem = "";
@@ -94,30 +94,21 @@ function placeOrder(){
              )
             console.log('Thank you for your order.');
           }
-            //push purchase into cart
-            // cart.push({item:this.purchaseItem, qty: this.purchaseQty});
+            //to test: push purchase into cart
+            // cart.push(this.purchaseItem, this.purchaseQty);
             // console.log(cart);
             // console.log('Please confirm order.');
-            // placeOrder();            
+                 // inquirer
+        // .prompt
+        // if confirm - 
+            // placeOrder();
+            // DO UPDATESTOCK FIRST           
               // updateStock();
             }
       });
     });
-
     }//placeOrder ends
 
-    //         //show order for user to confirm
-        // inquirer
-        // .prompt
-        // if confirm
+// function updateStock(id, startQty, endQty){
 
-        //   displayOrder();
-
-        // 
-            
-        //   updateStock();
-    // }
-
-function updateStock(id, startQty, endQty){
-
-}
+// }
