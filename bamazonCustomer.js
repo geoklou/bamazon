@@ -30,20 +30,20 @@ function runOrder() {
                 res[i].item_id +
                 " || Item: " +
                 res[i].product_name +
-                // " || Department: " +
-                // res[i].department_name +
                 " || Unit Price: $ " +
                 res[i].price
             )}
-            // placeOrder();
           }
-        placeOrder();
+          // place order
+          placeOrder();
         });
     }
 
 //create variables to hold values
+
 //to test:global object or array to keep multiple orders for each customer
-var cart = {item:"", qty:""};
+// var cart = {item:"", qty:""};
+
 //global variables to hold item and qty for each cycle of order
 var purchaseItem = "";
 var purchaseQty = "";
@@ -62,24 +62,25 @@ function placeOrder(){
     }
     ])
     .then(function(answer) {
+      //capture order item and qty
         purchaseItem = answer.choice;
         purchaseQty = answer.qty;
 
-        // var query = "SELECT * FROM products where ?", 
-        // {item_id: answer.choice},
+        //check stock by item id
         connection.query("SELECT * FROM products where ?", 
         {item_id: purchaseItem}, function(err, res) {
           if (err){
             throw err;
           } 
           for (var i = 0; i < res.length; i++) {
+          //if stock empty, show stock-out message
           if (res[i].stock_quantity < answer.qty){
             console.log("Sorry, the stock for this item has been depleted. Please order another item.");
             placeOrder();
           }
           else {
-            //print order
-            console.log(res);
+            //if stock available, print order
+            // console.log(res);
             console.log(
                 "Ordered: ID: " +
                 res[i].item_id +
@@ -92,23 +93,32 @@ function placeOrder(){
                 " \n Total price: $" +
                 res[i].price*purchaseQty
              )
-            console.log('Thank you for your order.');
+              //update db - subtract order qty from stock_qty
+               connection.query(
+              "UPDATE products SET ? WHERE ?",
+              [
+                {
+                  stock_quantity: res[i].stock_quantity - purchaseQty
+                },
+                {
+                  item_id: res[i].item_id
+                }
+              ],
+              function(error) {
+              if (error) throw err;
+              console.log('Thank you for your order.');
+              }
+            );
           }
-            //to test: push purchase into cart
-            // cart.push(this.purchaseItem, this.purchaseQty);
+            //to test for multiple item_id order (if have time, after challeneg #2): push purchase into cart
+            // cart.push();
             // console.log(cart);
             // console.log('Please confirm order.');
-                 // inquirer
-        // .prompt
-        // if confirm - 
-            // placeOrder();
-            // DO UPDATESTOCK FIRST           
-              // updateStock();
+            // inquirer
+            // .prompt
+            // if confirm - 
+            // update db
             }
       });
     });
     }//placeOrder ends
-
-// function updateStock(id, startQty, endQty){
-
-// }
