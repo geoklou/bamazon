@@ -110,15 +110,15 @@ function manageStock(){
           message: "Which item do you want to add?"
         },
         {
-          name: "addQty",
+          name: "totalQty",
           type: "input",
-          message: "How many units do you want to add?"
+          message: "Enter total quantity after this addition:"
         }]
     )
     .then(function(answer) {
     connection.query(" UPDATE products SET ? WHERE ? ",
                 [{
-                  stock_quantity: stock_quantity + answer.addQty,
+                  stock_quantity: answer.totalQty,
                 },
                 {
                   item_id: answer.addItem 

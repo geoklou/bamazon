@@ -3,7 +3,7 @@ Bamazon Online Store
 ====================
 Overview
 -----------------------------------------------------------------
-Bamazon is a mini online store where users can purchase stuff from an array of merchandise. This is a backend app where users interact with a computer terminal instead of a browser.
+Bamazon is a mini online store where users can purchase goods from an array of merchandise. This is a backend app where users interact with a computer terminal instead of a browser.
 
 Technology
 -----------------------------------------------------------------
@@ -13,7 +13,7 @@ How to Use
 -----------------------------------------------------------------
 bamazonCustomer.js displays a list of merchandise showing item ID, description and price. A user is prompted to enter item ID and quantiry to order. If the item is out-of-stock, the program shows stock-out message and prompts the user to select another item.
 
-Stock Out Message:
+Stock Out Message - item 13 is hot!
 ![stock out](screenshots/stockout.png "stock out")
 
 After the order is placed, the user sees an order summary:
@@ -32,12 +32,24 @@ Option 1 shows the entire product inventory list.
 
 Option 2 shows products with inventory of less than 10. 
 
-Manager View Product and View Low Inventory List
+Manager View Product and View Low Inventory List:
 ![view products & low inventory](screenshots/manager_1.png "products")
 
-Option 3 prompts the user to add stock to the low inventory items by entering item ID and quantity.
-Note: the code does not keep existing value - it replaces the existing value with the new value
+Option 3 prompts the user to add stock to the low inventory items by entering item ID and quantity. Based on exisitng inventory and low inventory information, the manager would add stock to the inventory.
+
+Note: the program replaces the existing value with the new value. Therefore, the manager would first add the old invenotry quantity to the added quantity, then enter the total (new) quantity.
+
+Entered 10 units to item 11:
+![add inventory & view updated product list](screenshots/manager_3.png "products")
 
 Option 4 prompts the user to insert a new product by entering item description, department, quantiry and unit price.
 
+Added item 12:
 ![add products & view updated product list](screenshots/manager_2.png "products")
+
+
+Navigation at Command Prompt
+-----------------------------------------------------------------
+node + program name -- run a program
+clear -- clear the terminal
+Control + c -- return to command prompt
