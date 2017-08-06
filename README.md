@@ -7,7 +7,7 @@ Bamazon is a mini online store where users can purchase stuff from an array of m
 
 Technology
 -----------------------------------------------------------------
-The user interface is deployed in a terminal using "node.js", and npm packages "inquirer" and "mysql". Data is stored in mysql server with mysql workbench as the user interface. "inquirer" gets user input and "mysql" manipulates database and data with CRUD (create, Read, Update,Delete) commands. Program backbone is javascript.
+The user interface is deployed in a terminal using "node.js", and npm packages "inquirer" and "mysql". Data is stored in mysql server with mysql workbench as the user interface. "inquirer" gets user input and "mysql" manipulates database and data with CRUD (Create, Read, Update, Delete) commands. Program backbone is javascript.
 
 How to Use
 -----------------------------------------------------------------
