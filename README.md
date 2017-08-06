@@ -54,4 +54,4 @@ type: node <program file name, including extension> to run that program
 
 type: clear to clear the terminal
 
-key <Control> + key <c> to return to Command Prompt
+key CTRL + key c to return to Command Prompt
