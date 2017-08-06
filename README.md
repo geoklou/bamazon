@@ -50,8 +50,8 @@ Added item 12:
 
 Navigation at Command Prompt
 -----------------------------------------------------------------
-node + program name -- run a program
+type: node <program file name, including extension> to run that program
 
-clear -- clear the terminal
+type: clear to clear the terminal
 
-Control + c -- return to command prompt
+key <Control> + key <c> to return to Command Prompt
