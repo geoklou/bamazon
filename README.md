@@ -51,5 +51,7 @@ Added item 12:
 Navigation at Command Prompt
 -----------------------------------------------------------------
 node + program name -- run a program
+
 clear -- clear the terminal
+
 Control + c -- return to command prompt
