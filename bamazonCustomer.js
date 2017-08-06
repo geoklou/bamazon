@@ -39,11 +39,6 @@ function runOrder() {
         });
     }
 
-//create variables to hold values
-
-//to test:global object or array to keep multiple orders for each customer
-// var cart = {item:"", qty:""};
-
 //global variables to hold item and qty for each cycle of order
 var purchaseItem = "";
 var purchaseQty = "";
@@ -76,6 +71,7 @@ function placeOrder(){
           //if stock empty, show stock-out message
           if (res[i].stock_quantity < answer.qty){
             console.log("Sorry, the stock for this item has been depleted. Please order another item.");
+            console.log("-----------------------------------------------------------------------------------");
             placeOrder();
           }
           else {
@@ -94,7 +90,7 @@ function placeOrder(){
                 res[i].price*purchaseQty
              )
               //update db - subtract order qty from stock_qty
-               connection.query(
+              connection.query(
               "UPDATE products SET ? WHERE ?",
               [
                 {
@@ -107,18 +103,11 @@ function placeOrder(){
               function(error) {
               if (error) throw err;
               console.log('Thank you for your order.');
+              console.log("-----------------------------------------------------------------------------------");
               }
             );
           }
-            //to test for multiple item_id order (if have time, after challeneg #2): push purchase into cart
-            // cart.push();
-            // console.log(cart);
-            // console.log('Please confirm order.');
-            // inquirer
-            // .prompt
-            // if confirm - 
-            // update db
-            }
+        }
       });
     });
     }//placeOrder ends

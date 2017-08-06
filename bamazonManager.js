@@ -14,6 +14,7 @@ connection.connect(function(err) {
   else manageStock();
 });
 
+//main menu
 function manageStock(){
     inquirer
         .prompt({
@@ -51,10 +52,7 @@ function manageStock(){
     function viewProducts(){
         var query = "SELECT * FROM products";
         connection.query(query, function(err, res) {
-          if (err){
-              throw err;
-            } 
-          
+          if (err) throw err;
           else {
             for (var i = 0; i < res.length; i++) {
             // console.log(res[i]);
@@ -77,13 +75,12 @@ function manageStock(){
         });
     }//viewProducts ends
 
-
     function viewLowInventory(){
         var query = " SELECT * from products WHERE stock_quantity<=10 ";
         connection.query(query, function(err, res) {
-          if (err)throw err;
+          if (err) throw err;
           else {
-            //   console.log("Items with less than 10 in stock:");
+            // console.log("Items with less than 10 in stock:");
                 for (var i = 0; i < res.length; i++) {
                 console.log(
                 "\n" + "ID: " +
@@ -99,14 +96,88 @@ function manageStock(){
                 )}//log & for
                 console.log("-----------------------------------------------------------------------------------");
               }//else
+                //return to main menu
                 manageStock();
-            });//query, function (error)
+            }); 
     }//viewLowInventory ends
 
-    // function addInventory(){
-        
-    // }
+    function addInventory(){
+        inquirer
+        .prompt([
+        {
+          name: "addItem",
+          type: "input",
+          message: "Which item do you want to add?"
+        },
+        {
+          name: "addQty",
+          type: "input",
+          message: "How many units do you want to add?"
+        }]
+    )
+    .then(function(answer) {
+    connection.query(" UPDATE products SET ? WHERE ? ",
+                [{
+                  stock_quantity: stock_quantity + answer.addQty,
+                },
+                {
+                  item_id: answer.addItem 
+                }],
+                function(err, res) {
+                if (err) throw err;
+                  else {  
+                  // console.log(res);
+                  console.log(res.affectedRows + " products updated!\n");
+                  console.log("-----------------------------------------------------------------------------------");
+                }//else
+                //return to main menu
+                manageStock();
+            });
+        });
+    }//addInventory ends
 
-    // function addNewProducts(){
-        
-    // }
+
+    function addNewProduct(){
+        inquirer
+        .prompt([
+        {
+          name: "addProduct",
+          type: "input",
+          message: "Enter product:"
+        },
+        {
+          name: "addDept",
+          type: "input",
+          message: "Enter department:"
+        },
+        {
+          name: "addQty",
+          type: "input",
+          message: "Enter quantity:"
+        },
+        {
+        name: "addPrice",
+        type: "input",
+        message: "Enter unit price:"
+        }]
+    )
+    .then(function(answer) {
+    connection.query(" INSERT INTO products SET ?  ",
+                {
+                  product_name: answer.addProduct,
+                  department_name: answer.addDept,
+                  stock_quantity: answer.addQty,
+                  price: answer.addPrice 
+                },
+                function(err, res) {
+                if (err) throw err;
+                  else {  
+                  console.log(res);
+                  console.log(res.affectedRows + " products updated!\n");
+                  console.log("-----------------------------------------------------------------------------------");
+                }//else
+                //return to main menu
+                manageStock();
+            });
+        });
+    }
